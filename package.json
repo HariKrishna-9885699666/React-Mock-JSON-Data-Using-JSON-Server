@@ -28,7 +28,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "concurrently --names 'SERVER,CLIENT' --prefix-colors 'yellow,blue' --kill-others 'json-server -p 3001 --watch src/orders.json' 'react-scripts start'",
+    "start": "concurrently --names 'SERVER,CLIENT' --prefix-colors 'yellow,blue' --kill-others 'json-server -p 3001 --watch db.json' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
