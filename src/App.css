@@ -1,0 +1,53 @@
+.bg-primary {
+  background-color: #2d32cc !important;
+}
+
+.fill-height {
+  position: relative;
+  min-height: 100%;
+  height: 70vh;
+}
+
+#hello {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+#hello h1 {
+  text-align: center;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.first-letter {
+  text-transform: capitalize;
+}
+
+.ordered {
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.inprogress {
+  color: rgb(255, 0, 221);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.cancelled {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.completed {
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
