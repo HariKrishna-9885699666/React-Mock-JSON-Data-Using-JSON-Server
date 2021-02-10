@@ -15,7 +15,7 @@ const Navigationbar = () => {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content">
         <Nav>
-          <Nav.Link href="#">Mock JSON Data using JSON SERVER</Nav.Link>
+          <Nav.Link href="/">Mock JSON Data using JSON SERVER</Nav.Link>
         </Nav>
         <Navbar.Text className="ml-auto">
           <Link to="/myOrders" className="btn">

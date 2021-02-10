@@ -1,15 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { getOrder } from "../api/orders";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import useStyles from "../constants/useStyles";
 import _ from "lodash";
+import useAsync from "react-use-async-hook";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Order = () => {
-  const [order, setOrder] = useState({});
   const { id } = useParams();
-  useEffect(async () => {
-    setOrder(await getOrder(id));
-  }, []);
+  const classes = useStyles();
+  const [loaderOpen, setLoaderOpen] = useState(false);
+  const handleLoader = (value) => {
+    if (loaderOpen !== value) {
+      setLoaderOpen(value);
+    }
+  };
+
+  const {
+    data: order,
+    loading: getMyOrdersDetailsLoading,
+    execute: getMyOrdersDetailsAPIExec,
+  } = useAsync({
+    autoExecute: false,
+    initialData: useMemo(() => [], []),
+    task: useCallback(
+      (id) => {
+        return getOrder(id);
+      },
+      [id]
+    ),
+    dataLoader: useCallback((response) => {
+      return response;
+    }, []),
+    onError: useCallback((errorRes) => {
+      console.log(errorRes);
+    }, []),
+  });
+
+  useEffect(() => {
+    getMyOrdersDetailsAPIExec(id);
+  }, [id]);
+
+  const showLoader = useMemo(() => getMyOrdersDetailsLoading, [
+    getMyOrdersDetailsLoading,
+  ]);
+  handleLoader(showLoader);
   return (
     <div className=" ml-5 mr-5">
       <h1>Order Details</h1>
@@ -60,6 +97,9 @@ const Order = () => {
           </tr>
         </tbody>
       </Table>
+      <Backdrop className={classes.backdrop} open={loaderOpen}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
